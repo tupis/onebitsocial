@@ -17,7 +17,20 @@ export default class UsersController {
     return 'Not found user'
   }
 
-  public async update() {}
+  public async update({ request, params }: HttpContextContract) {
+    const body = request.body()
+
+    const updateUser = await User.findOrFail(params.id)
+
+    updateUser.name = body.name
+    updateUser.username = body.username
+    updateUser.email = body.email
+    updateUser.password = body.password
+
+    await updateUser.save()
+
+    return updateUser
+  }
 
   public async delete() {}
 }
