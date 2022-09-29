@@ -8,7 +8,14 @@ export default class UsersController {
     return users
   }
 
-  public async show() {}
+  public async show({ params }: HttpContextContract) {
+    const user = await User.find(params.id)
+
+    if (user) {
+      return user
+    }
+    return 'Not found user'
+  }
 
   public async update() {}
 
