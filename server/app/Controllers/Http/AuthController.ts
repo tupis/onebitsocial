@@ -16,6 +16,8 @@ export default class AuthController {
         rules.maxLength(255),
       ]),
       password: schema.string({}, [rules.minLength(8)]),
+      admin: schema.boolean(),
+      teacher: schema.boolean(),
     })
 
     const data = await request.validate({ schema: userSchema })

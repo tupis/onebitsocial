@@ -25,7 +25,7 @@ export default class User extends BaseModel {
   public admin: boolean
 
   @column()
-  public teachers: boolean
+  public teacher: boolean
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
