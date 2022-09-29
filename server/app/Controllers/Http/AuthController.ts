@@ -5,7 +5,7 @@ export default class AuthController {
 
   public async login() {}
 
-  public async auth() {}
+  public async validator() {}
 
   public async logout() {}
 }
