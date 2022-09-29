@@ -41,7 +41,14 @@ export default class AuthController {
     }
   }
 
-  public async validator() {}
+  public async validator({ auth }: HttpContextContract) {
+    await auth.use('api').authenticate()
+
+    return {
+      auth: true,
+      id: auth.user!.id,
+    }
+  }
 
   public async logout() {}
 }
