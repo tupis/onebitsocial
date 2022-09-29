@@ -30,6 +30,8 @@ export default class UsersController {
     updateUser.username = body.username
     updateUser.email = body.email
     updateUser.password = body.password
+    updateUser.admin = body.admin
+    updateUser.teacher = body.teacher
 
     await updateUser.save()
 
