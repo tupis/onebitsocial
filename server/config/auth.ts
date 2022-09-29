@@ -18,7 +18,7 @@ const authConfig: AuthConfig = {
 
         identifierKey: 'id',
 
-        uids: ['email'],
+        uids: ['username'],
 
         model: () => import('App/Models/User'),
       },

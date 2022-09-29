@@ -27,7 +27,19 @@ export default class AuthController {
     return user
   }
 
-  public async login() {}
+  public async login({ auth, request, response }: HttpContextContract) {
+    const username = request.input('username')
+    const password = request.input('password')
+
+    try {
+      const token = await auth.use('api').attempt(username, password, {
+        expiresIn: '7 days',
+      })
+      return token
+    } catch (error) {
+      return response.unauthorized('Invalid credentials')
+    }
+  }
 
   public async validator() {}
 
