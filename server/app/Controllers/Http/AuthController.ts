@@ -22,9 +22,7 @@ export default class AuthController {
 
     const user = await User.create(data)
 
-    response.status(201)
-
-    return user
+    return response.status(201).send(user)
   }
 
   public async login({ auth, request, response }: HttpContextContract) {
@@ -35,26 +33,26 @@ export default class AuthController {
       const token = await auth.use('api').attempt(username, password, {
         expiresIn: '7 days',
       })
-      return token
+      return response.status(200).send(token)
     } catch (error) {
       return response.unauthorized('Invalid credentials')
     }
   }
 
-  public async validator({ auth }: HttpContextContract) {
+  public async validator({ auth, response }: HttpContextContract) {
     await auth.use('api').authenticate()
 
-    return {
+    return response.status(200).send({
       auth: true,
       id: auth.user!.id,
-    }
+    })
   }
 
-  public async logout({ auth }: HttpContextContract) {
+  public async logout({ auth, response }: HttpContextContract) {
     await auth.use('api').revoke()
 
-    return {
+    return response.status(200).send({
       revoked: true,
-    }
+    })
   }
 }
