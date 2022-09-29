@@ -12,7 +12,7 @@ export default class UsersSchema extends BaseSchema {
       table.string('email', 255).notNullable().unique()
       table.string('password', 180).notNullable()
       table.string('remember_me_token').nullable()
-      table.boolean('admin').defaultTo(false)
+      table.boolean('admin')
       table.boolean('teacher')
 
       table.timestamp('created_at', { useTz: true }).notNullable()
