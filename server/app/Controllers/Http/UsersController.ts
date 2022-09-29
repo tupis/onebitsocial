@@ -32,5 +32,11 @@ export default class UsersController {
     return updateUser
   }
 
-  public async delete() {}
+  public async delete({ params }: HttpContextContract) {
+    const deleteUser = await User.findOrFail(params.id)
+
+    deleteUser.delete()
+
+    return deleteUser
+  }
 }
