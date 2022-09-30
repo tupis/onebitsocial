@@ -28,11 +28,11 @@ export default class AuthController {
   }
 
   public async login({ auth, request, response }: HttpContextContract) {
-    const email = request.input('email')
+    const uid = request.input('email', request.input('username'))
     const password = request.input('password')
 
     try {
-      const token = await auth.use('api').attempt(email, password, {
+      const token = await auth.use('api').attempt(uid, password, {
         expiresIn: '7 days',
       })
       return response.status(200).send(token)
