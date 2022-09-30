@@ -19,4 +19,6 @@ Route.group(() => {
 Route.group(() => {
   Route.get('/redirect', 'GithubsController.redirect').as('github.redirect')
   Route.get('/callback', 'GithubsController.callback').as('github.callback')
+  Route.get('/users', 'GithubsController.index').as('github.users')
+  Route.get('/user/:id', 'GithubsController.index').as('github.user')
 }).prefix('/github')

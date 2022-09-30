@@ -36,10 +36,9 @@ export default class GithubsController {
     try {
       const githubUser = await GithubUser.create(userData)
 
-      return response.status(201).send({
-        message: 'User saved!',
-        githubUser,
-      })
+      console.log(githubUser)
+
+      return response.redirect(`http://localhost:5173/?Auth=${userData.id}`)
     } catch (error) {
       const githubUser = await GithubUser.findOrFail(user.id)
 
@@ -52,10 +51,19 @@ export default class GithubsController {
 
       console.log(error)
 
-      return response.status(200).send({
-        msg: 'Updated user!',
-        githubUser,
-      })
+      return response.redirect(`http://localhost:5173/redirect?Auth=${userData.id}`)
     }
+  }
+
+  public async index({ response }: HttpContextContract) {
+    const users = await GithubUser.all()
+
+    return response.status(200).json(users)
+  }
+
+  public async show({ response, params }: HttpContextContract) {
+    const user = await GithubUser.find(params.id)
+
+    return response.status(200).json(user)
   }
 }
