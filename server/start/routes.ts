@@ -15,3 +15,8 @@ Route.group(() => {
     Route.post('/logout', 'AuthController.logout').as('user.logout')
   }).prefix('/user')
 })
+
+Route.group(() => {
+  Route.get('/redirect', 'GithubsController.redirect').as('github.redirect')
+  Route.get('/callback', 'GithubsController.callback').as('github.callback')
+}).prefix('/github')
