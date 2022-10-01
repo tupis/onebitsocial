@@ -10,7 +10,7 @@ export default class GithubsController {
     })
   }
 
-  public async callback({ ally, response, auth, request }: HttpContextContract) {
+  public async callback({ ally, response, auth }: HttpContextContract) {
     const github = ally.use('github')
 
     if (github.accessDenied()) {
