@@ -1,5 +1,4 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import SetCookies from "../services/cookies/setCookie";

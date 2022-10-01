@@ -7,7 +7,6 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Welcome to dashboard</h1>
-      <Link to="/login">Voltar para o login</Link>
       <button
         onClick={() => {
           removeCookie("Nekot");
