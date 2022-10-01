@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import GithubUser from 'App/Models/GithubUser'
+import Env from '@ioc:Adonis/Core/Env'
 
 export default class GithubsController {
   public async redirect({ ally }: HttpContextContract) {
@@ -49,7 +50,7 @@ export default class GithubsController {
       await githubUser.save()
 
       console.log('Atualizado')
-      return response.redirect(`http://localhost:5173/redirect?Auth=${userData.id}`)
+      return response.redirect(`${Env.get('FRONTEND_URL')}/redirect?Auth=${userData.id}`)
     }
   }
 
