@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import GithubUser from 'App/Models/GithubUser'
+import User from 'App/Models/User'
 import Env from '@ioc:Adonis/Core/Env'
 
 export default class GithubsController {
@@ -9,7 +10,7 @@ export default class GithubsController {
     })
   }
 
-  public async callback({ ally, response }: HttpContextContract) {
+  public async callback({ ally, response, auth, request }: HttpContextContract) {
     const github = ally.use('github')
 
     if (github.accessDenied()) {
@@ -27,30 +28,57 @@ export default class GithubsController {
     const user = await github.user()
 
     const userData = {
-      id: user.id,
+      github_id: user.id,
+      name: user.name,
       username: user.original.login,
       email: user.email,
       avatar_url: user.avatarUrl,
-      token: user.token.token,
+      password: user.token.token,
+      github_auth: user.token.token,
     }
-
     try {
-      await GithubUser.create(userData)
+      await User.create(userData)
+      const updateUser = await User.findByOrFail('github_id', userData.github_id)
 
-      console.log('Salvo')
-      return response.redirect(`${Env.get('FRONTEND_URL')}/?Auth=${userData.id}`)
+      updateUser.username = user.original.name
+      updateUser.password = user.token.token
+
+      await updateUser.save()
+      const uid = user.original.name
+      const password = user.token.token
+
+      try {
+        const token = await auth.use('api').attempt(uid, password, {
+          expiresIn: '7 days',
+        })
+        return response.redirect(
+          `http://${Env.get('FRONTEND_URL')}/redirect?callback=${token.token}`
+        )
+      } catch (error) {
+        console.log(error)
+        return response.unauthorized('Invalid credentials')
+      }
     } catch (error) {
-      const githubUser = await GithubUser.findOrFail(user.id)
+      const updateUser = await User.findByOrFail('github_id', userData.github_id)
 
-      githubUser.username = userData.username
-      githubUser.email = userData.email
-      githubUser.avatar_url = userData.avatar_url
-      githubUser.token = userData.token
+      updateUser.username = user.original.name
+      updateUser.password = user.token.token
 
-      await githubUser.save()
+      await updateUser.save()
+      const uid = user.original.name
+      const password = user.token.token
 
-      console.log('Atualizado')
-      return response.redirect(`${Env.get('FRONTEND_URL')}/redirect?Auth=${userData.id}`)
+      try {
+        const token = await auth.use('api').attempt(uid, password, {
+          expiresIn: '7 days',
+        })
+        return response.redirect(
+          `http://${Env.get('FRONTEND_URL')}/redirect?callback=${token.token}`
+        )
+      } catch (error) {
+        console.log(error)
+        return response.unauthorized('Invalid credentials')
+      }
     }
   }
 
