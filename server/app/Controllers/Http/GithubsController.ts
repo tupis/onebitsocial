@@ -36,8 +36,7 @@ export default class GithubsController {
     try {
       const githubUser = await GithubUser.create(userData)
 
-      console.log(githubUser)
-
+      console.log('Salvo')
       return response.redirect(`http://localhost:5173/?Auth=${userData.id}`)
     } catch (error) {
       const githubUser = await GithubUser.findOrFail(user.id)
@@ -49,8 +48,7 @@ export default class GithubsController {
 
       await githubUser.save()
 
-      console.log(error)
-
+      console.log('Atualizado')
       return response.redirect(`http://localhost:5173/redirect?Auth=${userData.id}`)
     }
   }
