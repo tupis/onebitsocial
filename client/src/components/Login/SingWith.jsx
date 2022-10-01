@@ -47,8 +47,9 @@ export default function SingWith() {
             <div>
               <button
                 onClick={() => {
-                  window.location.href =
-                    "http://localhost:3333/github/redirect";
+                  window.location.href = `${
+                    import.meta.env.VITE_URL
+                  }/github/redirect`;
                 }}
                 className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
               >
