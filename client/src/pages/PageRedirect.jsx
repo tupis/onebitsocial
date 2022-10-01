@@ -1,6 +1,8 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import SetCookies from "../services/cookies/setCookie";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -12,20 +14,10 @@ const ScreenRedirect = () => {
 
   useEffect(() => {
     axios.get(`http://localhost:3333/github/user/${id}`).then((res) => {
-      localStorage.setItem("Nekot", res.data[0].token);
-      localStorage.setItem("ID", id);
+      SetCookies("Nekot", res.data[0].token);
+      SetCookies("ID", id);
     });
-
-    setTimeout(() => {
-      window.location.href = "/dashboard";
-    }, 500);
   }, []);
-
-  return (
-    <>
-      <div>Redirecting...</div>
-    </>
-  );
 };
 
 export default ScreenRedirect;
