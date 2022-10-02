@@ -1,13 +1,15 @@
 import Cookies from "js-cookie";
 
-const SetCookies = (cookiename, name) => {
+const SetCookies = (cookiename, name, toRedirect) => {
   Cookies.set(cookiename, name, {
     expires: 7,
     sameSite: "strict",
     path: "/",
   });
 
-  window.location.href = "/dashboard";
+  if (toRedirect) {
+    window.location.href = "/dashboard";
+  }
 };
 
 export default SetCookies;

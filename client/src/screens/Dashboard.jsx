@@ -9,8 +9,7 @@ const Dashboard = () => {
       <h1>Welcome to dashboard</h1>
       <button
         onClick={() => {
-          removeCookie("Nekot");
-          removeCookie("ID");
+          removeCookie(import.meta.env.VITE_URL);
           navigate("/login");
         }}
       >

@@ -1,5 +1,3 @@
-import axios from "axios";
-import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import SetCookies from "../services/cookies/setCookie";
 
@@ -9,14 +7,10 @@ function useQuery() {
 
 const ScreenRedirect = () => {
   const query = useQuery();
-  const id = query.get("Auth");
+  const id = query.get("callback");
+  const toRedirect = true;
 
-  useEffect(() => {
-    axios.get(`${import.meta.env.VITE_URL}/github/user/${id}`).then((res) => {
-      SetCookies("Nekot", res.data[0].token);
-      SetCookies("ID", id);
-    });
-  }, []);
+  SetCookies(import.meta.env.VITE_URL, id, toRedirect);
 };
 
 export default ScreenRedirect;

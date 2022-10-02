@@ -16,7 +16,9 @@ function App() {
           <Route path="/redirect" element={<Redirect />} />
           <Route
             element={
-              <PrivateRoute isLogged={GetCookies("Nekot") ? true : false} />
+              <PrivateRoute
+                isLogged={GetCookies(import.meta.env.VITE_URL) ? true : false}
+              />
             }
           >
             <Route path="/dashboard" element={<Dashboard />} />
