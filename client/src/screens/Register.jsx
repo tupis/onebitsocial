@@ -1,15 +1,18 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
+import { Fragment, useContext} from 'react'
 import RegisterForm from '../components/Login/RegisterForm'
 import { Dialog, Transition } from '@headlessui/react'
-import { CheckIcon } from '@heroicons/react/outline'
+import { ProviderContext } from '../services/Context'
+
 
 export default function Example() {
-  const [open, setOpen] = useState(false)
+ 
+
+  const { closeForm, SwitchModal}= useContext(ProviderContext)
 
   return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={setOpen}>
+    <Transition.Root show={closeForm} as={Fragment}>
+      <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={() => SwitchModal()}>
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
             as={Fragment}
