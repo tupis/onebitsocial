@@ -12,7 +12,7 @@ import { styles } from "./style";
 import logo from "../../assets/onebitcode.png";
 import { SocialIcon } from "react-native-elements";
 
-export default function Login() {
+export default function Login({ navigation }: any) {
   const [nome, onChageNome] = React.useState("");
   const [email, onChangeText] = React.useState("");
   const [username, onChangeUsername] = React.useState("");
@@ -81,7 +81,7 @@ export default function Login() {
         <View style={styles.loginArea}>
           <Text style={styles.loginText}>Ja se registrou?</Text>
           <TouchableOpacity
-            onPress={() => alert("Foi Para o Login")}
+            onPress={() => navigation.navigate("Login")}
             style={styles.buttonLogin}
           >
             <Text style={styles.buttonLoginText}>Fazer Login</Text>
