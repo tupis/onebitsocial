@@ -8,8 +8,6 @@ const useLogin = async (email, password) => {
   })
     .then((res) => {
       if (res.data.token) {
-        console.log(res.data.token);
-
         Api.get("/user/validator", {
           headers: { Authorization: `Bearer ${res.data.token}` },
         })

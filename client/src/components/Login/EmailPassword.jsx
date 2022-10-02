@@ -1,13 +1,22 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ProviderContext } from "../../services/Context";
 import useLogin from "../../services/login/login";
 
 export default function EnterLogin() {
   const { SwitchModal } = useContext(ProviderContext);
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <>
       <div className="mt-6">
-        <form action="#" method="POST" className="space-y-6">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            useLogin(login, password);
+          }}
+          className="space-y-6"
+        >
           <div>
             <label
               htmlFor="email"
@@ -17,6 +26,7 @@ export default function EnterLogin() {
             </label>
             <div className="mt-1">
               <input
+                onChange={(e) => setLogin(e.target.value)}
                 id="email"
                 name="email"
                 type="text"
@@ -36,6 +46,7 @@ export default function EnterLogin() {
             </label>
             <div className="mt-1">
               <input
+                onChange={(e) => setPassword(e.target.value)}
                 id="password"
                 name="password"
                 type="password"
@@ -74,7 +85,6 @@ export default function EnterLogin() {
 
           <div className="grid gap-3">
             <button
-              onClick={() => useLogin("vinnydeguaratiba@gmail.com", "40028922")}
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
