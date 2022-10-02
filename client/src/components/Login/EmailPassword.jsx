@@ -1,4 +1,8 @@
+import { useContext } from "react";
+import { ProviderContext } from "../../services/Context";
+
 export default function EnterLogin() {
+  const { SwitchModal } = useContext(ProviderContext)
   return (
     <>
       <div className="mt-6">
@@ -67,12 +71,19 @@ export default function EnterLogin() {
             </div>
           </div>
 
-          <div>
+          <div className="grid gap-3">
             <button
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Sign in
+            </button>
+            <button
+            onClick={() => SwitchModal()}
+              type="button"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Register
             </button>
           </div>
         </form>
