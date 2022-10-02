@@ -11,13 +11,7 @@ import { styles } from "./style";
 import logo from "../../assets/onebitcode.png";
 import { SocialIcon } from "react-native-elements";
 
-// eye
-// eye-off
-// eye-off-outline
-// eye-off-sharp
-// eye-outline
-
-export default function Login() {
+export default function Login({ navigation }: any) {
   const [email, onChangeText] = React.useState("");
   const [password, onChangePassword] = React.useState("");
   const [error, setError] = React.useState("");
@@ -54,7 +48,7 @@ export default function Login() {
       <View style={styles.registerArea}>
         <Text style={styles.registerText}>Ainda não está registrado?</Text>
         <TouchableOpacity
-          onPress={() => alert("Foi Para o Login")}
+          onPress={() => navigation.navigate("Register")}
           style={styles.buttonRegister}
         >
           <Text style={styles.buttonRegisterText}>Registre-se</Text>
