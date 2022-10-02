@@ -38,7 +38,6 @@ export default class AuthController {
       })
       return response.status(200).send(token)
     } catch (error) {
-      console.log(body)
       return response.unauthorized('Invalid credentials')
     }
   }
