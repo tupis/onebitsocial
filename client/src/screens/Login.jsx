@@ -1,10 +1,13 @@
 import EnterLogin from "../components/Login/EmailPassword"
 import SingWith from "../components/Login/SingWith"
+import Register from '../screens/Register'
+
 
 export default function Login() {
 
         return (
             <>
+            <Register className="z-10"/>
               <div className="min-h-full flex">
                 <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
                   <div className="mx-auto w-full max-w-sm lg:w-96">
@@ -15,19 +18,11 @@ export default function Login() {
                         alt="Workflow"
                       />
                       <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
-                    </div>
-
-
-        
+                    </div>    
                     <div className="mt-8">
-
                     <SingWith />
                     <EnterLogin/>
-
-
                     </div>
-
-                    
                   </div>
                 </div>
                 <div className="hidden lg:block relative w-0 flex-1">
