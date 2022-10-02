@@ -30,6 +30,7 @@ export default class AuthController {
   public async login({ auth, request, response }: HttpContextContract) {
     const uid = request.input('email', request.input('username'))
     const password = request.input('password')
+    const body = request.body()
 
     try {
       const token = await auth.use('api').attempt(uid, password, {
