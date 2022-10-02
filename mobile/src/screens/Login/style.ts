@@ -73,6 +73,8 @@ export const styles = StyleSheet.create({
   },
   registerText: {
     color: "white",
+    fontSize: 17,
+    marginBottom: 7,
   },
   buttonRegister: {
     marginLeft: 5,
@@ -80,6 +82,7 @@ export const styles = StyleSheet.create({
   buttonRegisterText: {
     color: "red",
     alignSelf: "flex-end",
+    fontSize: 17,
   },
   socialIcons: {
     alignSelf: "center",

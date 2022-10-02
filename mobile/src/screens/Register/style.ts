@@ -72,6 +72,8 @@ export const styles = StyleSheet.create({
   },
   loginText: {
     color: "white",
+    fontSize: 17,
+    marginBottom: 7,
   },
   buttonLogin: {
     marginLeft: 5,
@@ -79,6 +81,7 @@ export const styles = StyleSheet.create({
   buttonLoginText: {
     color: "red",
     alignSelf: "flex-end",
+    fontSize: 17,
   },
   socialIcons: {
     alignSelf: "center",
