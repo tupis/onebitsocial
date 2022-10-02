@@ -51,9 +51,7 @@ export default class GithubsController {
         const token = await auth.use('api').attempt(uid, password, {
           expiresIn: '7 days',
         })
-        return response.redirect(
-          `http://${Env.get('FRONTEND_URL')}/redirect?callback=${token.token}`
-        )
+        return response.redirect(`${Env.get('FRONTEND_URL')}/redirect?callback=${token.token}`)
       } catch (error) {
         console.log(error)
         return response.unauthorized('Invalid credentials')
@@ -72,9 +70,7 @@ export default class GithubsController {
         const token = await auth.use('api').attempt(uid, password, {
           expiresIn: '7 days',
         })
-        return response.redirect(
-          `http://${Env.get('FRONTEND_URL')}/redirect?callback=${token.token}`
-        )
+        return response.redirect(`${Env.get('FRONTEND_URL')}/redirect?callback=${token.token}`)
       } catch (error) {
         console.log(error)
         return response.unauthorized('Invalid credentials')
