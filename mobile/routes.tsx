@@ -1,3 +1,4 @@
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useColorScheme } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {
@@ -6,26 +7,24 @@ import {
   DarkTheme,
 } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+//Screens App
 import Feed from "./src/screens/Feed";
 import Empregos from "./src/screens/Empregos";
 import Perfil from "./src/screens/Perfil";
 
+//Screens Initial
+import Login from "./src/screens/Login";
+import Register from "./src/screens/Register";
+import { useState } from "react";
+
 export default function Routes() {
   const Tab = createBottomTabNavigator();
+  const Stack = createNativeStackNavigator();
+
+  const [isLogged, setIsLogged] = useState(false);
 
   const themePreferenceScheme = useColorScheme();
-
-  // type Theme = {
-  //   dark: boolean;
-  //   colors: {
-  //     primary: string;
-  //     background: string;
-  //     card: string;
-  //     text: string;
-  //     border: string;
-  //     notification: string;
-  //   };
-  // };
 
   const LightThemePreference = {
     ...DefaultTheme,
@@ -85,6 +84,28 @@ export default function Routes() {
     );
   };
 
+  const Navigation = () => {
+    return (
+      <Stack.Navigator initialRouteName={isLogged ? "App" : "Login"}>
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="App"
+          component={OneBitSocial}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    );
+  };
+
   return (
     <>
       <NavigationContainer
@@ -94,7 +115,7 @@ export default function Routes() {
             : LightThemePreference
         }
       >
-        <OneBitSocial />
+        <Navigation />
       </NavigationContainer>
     </>
   );
