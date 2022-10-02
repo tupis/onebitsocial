@@ -1,20 +1,19 @@
-import { createContext, useState} from "react";
+import { createContext, useState } from "react";
 
-const ProviderContext = createContext()
+const ProviderContext = createContext();
 
-const ProviderProvider = ({children}) => {
-    const [ closeForm, setCloseForm ] = useState(false)
+const ProviderProvider = ({ children }) => {
+  const [closeForm, setCloseForm] = useState(false);
 
-    const SwitchModal = () => {
-        setCloseForm(!closeForm)
-    }
-    
+  const SwitchModal = () => {
+    setCloseForm(!closeForm);
+  };
 
-    return (
-        <ProviderContext.Provider value={{closeForm, SwitchModal}}>
-            {children}
-        </ProviderContext.Provider>
-    )
-}
+  return (
+    <ProviderContext.Provider value={{ closeForm, SwitchModal }}>
+      {children}
+    </ProviderContext.Provider>
+  );
+};
 
-export {ProviderProvider, ProviderContext};
+export { ProviderProvider, ProviderContext };
