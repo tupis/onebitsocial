@@ -22,7 +22,9 @@ function App() {
             <Route path="/*" element={<Error404 />} />
             <Route
               element={
-                <PrivateRoute isLogged={GetCookies("Nekot") ? true : false} />
+                <PrivateRoute
+                  isLogged={GetCookies(import.meta.env.VITE_URL) ? true : false}
+                />
               }
             >
               <Route path="/dashboard" element={<Dashboard />} />
