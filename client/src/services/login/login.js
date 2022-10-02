@@ -1,5 +1,5 @@
 import Api from "../Api";
-import SetCookies from "../cookies/setCookie";
+import userValidator from "../validator/Validator";
 
 const useLogin = async (email, password) => {
   await Api.post("/user/login", {
@@ -8,15 +8,7 @@ const useLogin = async (email, password) => {
   })
     .then((res) => {
       if (res.data.token) {
-        Api.get("/user/validator", {
-          headers: { Authorization: `Bearer ${res.data.token}` },
-        })
-          .then((response) => {
-            if (response.data.auth) {
-              SetCookies(import.meta.env.VITE_API_URL, res.data.token, true);
-            }
-          })
-          .catch((error) => console.log(error));
+        userValidator(res.data.token, true);
       }
     })
     .catch((error) => console.log(error));

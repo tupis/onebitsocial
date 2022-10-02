@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import GetCookies from "./cookies/getCookie";
 
 const ProviderContext = createContext();
 

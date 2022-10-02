@@ -12,6 +12,7 @@ const Logout = async () => {
       },
     }
   ).then((res) => console.log(res.data));
+  removeCookie("ID");
   removeCookie(import.meta.env.VITE_API_URL, true);
   window.location.href = "/login";
 };
