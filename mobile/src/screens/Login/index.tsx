@@ -30,14 +30,18 @@ export default function Login({ navigation }: any) {
     }
   };
 
+  const handleLogOut = async () => {
+    await AsyncStorage.removeItem("token");
+    setIsLogged("false");
+  };
+
   useLayoutEffect(() => {
     const getToken = async () => {
-      // const token = await AsyncStorage.removeItem("token");
       const token = await AsyncStorage.getItem("token");
       if (token) {
-        return navigation.navigate("App");
+        navigation.navigate("App");
+        setIsLogged("true");
       }
-      return setIsLogged("false");
     };
     getToken();
   }, []);
