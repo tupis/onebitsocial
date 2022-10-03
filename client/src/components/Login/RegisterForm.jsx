@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { userRegister } from "../../services/userValidation/userValidation";
 
 export default function RegisterForm() {
@@ -6,16 +6,24 @@ export default function RegisterForm() {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  const [match, setMatch] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     userRegister(name, username, email, password);
+    setMatch(true);
+  };
+
+  const dontMatch = (e) => {
+    e.preventDefault();
+    setMatch(false);
   };
 
   return (
     <>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={confirmPassword != password ? dontMatch : handleSubmit}
         className="space-y-8 divide-y divide-gray-200"
       >
         <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
@@ -24,7 +32,7 @@ export default function RegisterForm() {
               Create your accont
             </h3>
 
-            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 text-start sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
@@ -37,8 +45,9 @@ export default function RegisterForm() {
                   name="name"
                   id="name"
                   autoComplete="given-name"
-                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   onChange={(e) => setName(e.target.value)}
+                  required
+                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
 
@@ -54,8 +63,9 @@ export default function RegisterForm() {
                   name="username"
                   id="username"
                   autoComplete="given-username"
-                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   onChange={(e) => setUsername(e.target.value)}
+                  required
+                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
 
@@ -71,8 +81,9 @@ export default function RegisterForm() {
                   name="email"
                   id="email"
                   autoComplete="email"
-                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
 
@@ -88,8 +99,11 @@ export default function RegisterForm() {
                   name="password"
                   type="password"
                   autoComplete="password"
-                  className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
                   onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className={`block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                    match ? "border-gray-300" : "border-red-700"
+                  } rounded-md`}
                 />
               </div>
 
@@ -101,12 +115,23 @@ export default function RegisterForm() {
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
-                  type="text"
+                  type="password"
                   name="street-address"
                   id="street-address"
                   autoComplete="street-address"
-                  className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  className={`block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                    match ? "border-gray-300" : "border-red-700"
+                  } rounded-md`}
                 />
+                {!match ? (
+                  <span className="text-sm text-red-700">
+                    Password dont match
+                  </span>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
