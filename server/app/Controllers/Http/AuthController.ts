@@ -38,7 +38,7 @@ export default class AuthController {
       })
       return response.status(200).send(token)
     } catch (error) {
-      return response.unauthorized('Invalid credentials')
+      return response.unauthorized({ error: 'Invalid credentials' })
     }
   }
 

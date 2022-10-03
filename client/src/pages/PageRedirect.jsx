@@ -9,7 +9,6 @@ const ScreenRedirect = () => {
   const query = useQuery();
   const id = query.get("callback");
   const toRedirect = true;
-
   SetCookies(import.meta.env.VITE_URL, id, toRedirect);
 };
 

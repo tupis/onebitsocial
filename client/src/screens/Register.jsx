@@ -1,18 +1,19 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useContext} from 'react'
-import RegisterForm from '../components/Login/RegisterForm'
-import { Dialog, Transition } from '@headlessui/react'
-import { ProviderContext } from '../services/Context'
-
+import { Fragment, useContext } from "react";
+import RegisterForm from "../components/Login/RegisterForm";
+import { Dialog, Transition } from "@headlessui/react";
+import { ProviderContext } from "../services/Context";
 
 export default function Example() {
- 
-
-  const { closeForm, SwitchModal}= useContext(ProviderContext)
+  const { closeForm, SwitchModal } = useContext(ProviderContext);
 
   return (
     <Transition.Root show={closeForm} as={Fragment}>
-      <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={() => SwitchModal()}>
+      <Dialog
+        as="div"
+        className="fixed z-10 inset-0 overflow-y-auto"
+        onClose={() => SwitchModal()}
+      >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
             as={Fragment}
@@ -40,22 +41,14 @@ export default function Example() {
             <div className="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
               <div>
                 <div className="mt-3 text-center sm:mt-5">
-                  <RegisterForm/>
+                  <RegisterForm />
                 </div>
               </div>
-              <div className="mt-5 sm:mt-6">
-                <button
-                  type="button"
-                  className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
-                  onClick={() => setOpen(false)}
-                >
-                  Register
-                </button>
-              </div>
+              <div className="mt-5 sm:mt-6"></div>
             </div>
           </Transition.Child>
         </div>
       </Dialog>
     </Transition.Root>
-  )
+  );
 }
