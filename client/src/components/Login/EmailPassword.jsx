@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { ProviderContext } from "../../services/Context";
-import useLogin from "../../services/login/login";
+import { useLogin } from "../../services/userValidation/userValidation";
 
 export default function EnterLogin() {
   const { SwitchModal } = useContext(ProviderContext);
@@ -90,14 +90,14 @@ export default function EnterLogin() {
             >
               Sign in
             </button>
-            <button
-              onClick={() => SwitchModal()}
-              type="button"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Register
-            </button>
           </div>
+          <button
+            onClick={() => SwitchModal()}
+            type="button"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Register
+          </button>
         </form>
       </div>
     </>

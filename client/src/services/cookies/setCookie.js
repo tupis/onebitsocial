@@ -1,5 +1,4 @@
 import Cookies from "js-cookie";
-import GetCookies from "./getCookie";
 
 const SetCookies = (cookiename, name, toRedirect) => {
   Cookies.set(cookiename, name, {
@@ -9,9 +8,7 @@ const SetCookies = (cookiename, name, toRedirect) => {
   });
 
   if (toRedirect) {
-    if (GetCookies(import.meta.env.VITE_URL)) {
-      window.location.href = "/dashboard";
-    }
+    window.location.href = "/dashboard";
   }
 };
 
