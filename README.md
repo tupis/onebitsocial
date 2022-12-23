@@ -1,4 +1,4 @@
-# onebitsocial
+# OneBitSocial
 <span>
 <img src="https://cdn.discordapp.com/attachments/996999702291685416/1053505112083021835/image.png" alt="drawing" width="400"/>
 <img src="https://cdn.discordapp.com/attachments/996999702291685416/1053492526398578748/image.png" alt="drawing" width="400"/>
